@@ -2,18 +2,11 @@ import os
 import sys
 import csv
 import time
-import json
 from dateutil import parser as date_parser
 from chatterbot.conversation import Statement
 from chatterbot.tagging import PosLemmaTagger
 from chatterbot import utils
 
-def is_json(jsn):
-    try:
-        json.loads(jsn)
-    except ValueError as e:
-        return False
-    return True
 
 class Trainer(object):
     """
@@ -119,8 +112,7 @@ class ListTrainer(Trainer):
             previous_statement_text = statement.text
             previous_statement_search_text = statement_search_text
 
-            if not is_json(text):
-                statements_to_create.append(statement)
+            statements_to_create.append(statement)
 
         self.chatbot.storage.create_many(statements_to_create)
 
